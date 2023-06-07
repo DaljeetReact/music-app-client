@@ -11,7 +11,6 @@ import { useNavigate } from 'react-router-dom';
   const navigate =  useNavigate();
   const Authentication= async ()=>{
     await signInWithPopup(firebaseAuthentication,googleAuthenticationProvide).then((user)=>{
-      console.log({user});
       window.localStorage.setItem("auth",true);
       setIsLoggedIn(true);
       navigate("/home")
@@ -22,7 +21,7 @@ import { useNavigate } from 'react-router-dom';
     if(IsLoggedIn){
       navigate("/home");
     }
-  }, [])
+  })
   
    return (
      <div className='relative h-screen w-screen' >
