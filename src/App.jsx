@@ -1,17 +1,22 @@
 import { getAuth } from "firebase/auth";
 import { AnimatePresence } from 'framer-motion';
 import { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { Route, Routes, useNavigate } from 'react-router-dom';
 
 
+import { ValidateUserLogin } from "./apis";
 import { Home, Login } from './componets';
 import { FirebaseApp } from './config/firebase';
-import { ValidateUserLogin } from "./apis";
+import { setUserData } from "./store/reducers";
 function App() {
   const auth = getAuth(FirebaseApp);
   const checkAuth = false || (window.localStorage.getItem("auth")??false);
   const [IsLoggedIn, setIsLoggedIn] = useState(checkAuth);
   const navigate = useNavigate();
+
+  const dispatch = useDispatch()
+
  
   useEffect(() => {   
     if(!IsLoggedIn){ 
@@ -29,7 +34,10 @@ function App() {
       if (user.emailVerified) {
         user.getIdToken().then((token) => {
           ValidateUserLogin(token).then(({data})=>{
-            console.log({data});
+            if(data !== undefined){
+              dispatch(setUserData(data.data));
+            }
+           
           }).catch(e=>console.log(e));
         })
         setIsLoggedIn(true);
