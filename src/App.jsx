@@ -31,7 +31,7 @@ function App() {
   const CheckAuthState =  async () =>{
     //onAuthStateChanged is firebase method, it will trigger whenever the state will change
    await auth.onAuthStateChanged((user) => { 
-      if (user.emailVerified) {
+      if (user?.emailVerified) {
         user.getIdToken().then((token) => {
           ValidateUserLogin(token).then(({data})=>{
             if(data !== undefined){
@@ -50,7 +50,7 @@ function App() {
   }
   return (
     <AnimatePresence mode='wait'>
-      <div className="min-w-[680px] h-auto bg-primary flex items-center">
+      <div className="min-w-[680px] h-auto bg-primary">
         <Routes>
           <Route path='/home' element={<Home IsLoggedIn={IsLoggedIn} />} />
           <Route path='/login' element={<Login setIsLoggedIn={setIsLoggedIn} IsLoggedIn={IsLoggedIn} />} />
