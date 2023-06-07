@@ -1,8 +1,13 @@
 import React from 'react'
-
+import {Header} from './index'
 function Home({IsLoggedIn}) {
+  
   return (
-    <div>Home {IsLoggedIn}</div>
+    <div>
+    <Header/>
+    
+    
+    </div>
   )
 }
 
