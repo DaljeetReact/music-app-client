@@ -26,7 +26,7 @@ function App() {
     }
     CheckAuthState();
     console.log(" i am called");
-  });
+  },[]);
 
   const CheckAuthState =  async () =>{
     //onAuthStateChanged is firebase method, it will trigger whenever the state will change
