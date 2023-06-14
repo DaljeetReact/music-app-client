@@ -11,7 +11,7 @@ function Header() {
   const [isMenu, setIsMenu] = useState(false);
 
   const FireAuth = getAuth(FirebaseApp);
-  const {name,imgUrl} =  useSelector(state=>state.user);
+  const {name,imgUrl,role} =  useSelector(state=>state.user);
 
   const addActiveClass = ({ isActive }) => {
     return isActive ? isActiveClass : isNonActiveClasas
@@ -58,8 +58,11 @@ function Header() {
           exit={{ opacity: 0,y:50 }}
         className='menu absolute  top-12 z-20 right-0 w-80  bg-white rounded-md shadow-lg p-4'>
             <ul>
-              <li className={MenuItems}><NavLink>Profile</NavLink></li>
-              <li className={MenuItems}><NavLink>My Favorites</NavLink></li>
+              <li className={MenuItems}><NavLink to={"/profile"}>Profile</NavLink></li>
+              <li className={MenuItems}><NavLink to={"/my-favorites"}>My Favorites</NavLink></li>
+              {role==="admin"&&( 
+                <li className={MenuItems}><NavLink to={"/dashboard/home"}>Dashboard</NavLink></li>
+              )}
               <li className={[MenuItems,'border-t-5 border-gray-900 mt-3']} onClick={Logout}>Sign Out</li>
             </ul>
         </motion.div>

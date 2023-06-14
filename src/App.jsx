@@ -7,6 +7,7 @@ import { Route, Routes, useNavigate } from 'react-router-dom';
 
 import { ValidateUserLogin } from "./apis";
 import { Home, Login } from './componets';
+import { Home as DashboardHome, Songs ,Dashboard,Users } from './componets/admin';
 import { FirebaseApp } from './config/firebase';
 import { setUserData } from "./store/reducers";
 function App() {
@@ -54,7 +55,7 @@ function App() {
         <Routes>
           <Route path='/home' element={<Home IsLoggedIn={IsLoggedIn} />} />
           <Route path='/login' element={<Login setIsLoggedIn={setIsLoggedIn} IsLoggedIn={IsLoggedIn} />} />
-          <Route path='/*' element={<Home />} />
+          <Route path='/dashboard/*' element={<Dashboard />} />
         </Routes>
       </div>
     </AnimatePresence>
