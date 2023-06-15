@@ -2,6 +2,10 @@ import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
  user:{},
+ albums:[],
+ artists:[],
+ songs:[],
+ users:[],
  loading:false
 }
 
@@ -12,6 +16,15 @@ export const userDataSlice = createSlice({
     setUserData: (state,action) => {
       state.user = action.payload
     }, 
+    setSongs: (state,action) => {
+      state.songs = action.payload
+    },
+    setArtists: (state,action) => {
+      state.artists = action.payload
+    },
+    setAlbums: (state,action) => {
+      state.albums = action.payload
+    },
     setLoading: (state,action)=>{
         state.loading = action.payload
     }

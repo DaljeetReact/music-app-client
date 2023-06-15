@@ -2,7 +2,7 @@ import { getAuth } from "firebase/auth";
 import { AnimatePresence } from 'framer-motion';
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { Route, Routes, useNavigate } from 'react-router-dom';
+import { Route, Routes, useNavigate,Navigate } from 'react-router-dom';
 
 
 import { ValidateUserLogin } from "./apis";
@@ -53,6 +53,15 @@ function App() {
     <AnimatePresence mode='wait'>
       <div className="min-w-[680px] h-auto bg-primary">
         <Routes>
+          <Route exact path="/" 
+           render={() => {
+                    return (
+                      IsLoggedIn?
+                      <Navigate to="/home" replace={true} /> :
+                      <Navigate to="/login"  replace={true} /> 
+                    )
+                }}
+           />
           <Route path='/home' element={<Home IsLoggedIn={IsLoggedIn} />} />
           <Route path='/login' element={<Login setIsLoggedIn={setIsLoggedIn} IsLoggedIn={IsLoggedIn} />} />
           <Route path='/dashboard/*' element={<Dashboard />} />
