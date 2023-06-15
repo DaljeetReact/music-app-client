@@ -30,7 +30,7 @@ function Header() {
     <header className='flex items-center w-full p-4  md:py-2 md:px-6 justify-between' >
       <div className='flex'>
         <NavLink to={"/"} >
-          <img src={Logo} alt='app-logo' className='w-16' />
+          <img src={Logo} referrerPolicy="no-referrer" alt='app-logo' className='w-16' />
         </NavLink>
 
         <ul className='flex items-center justify-center ml-7'>
@@ -45,7 +45,7 @@ function Header() {
       onMouseEnter={()=>setIsMenu(true)}
       onMouseLeave={()=>setIsMenu(false)}
     >
-      <img src={imgUrl} alt={name} className='w-11 rounded-full'/>
+      <img src={imgUrl} referrerPolicy="no-referrer" alt={name} className='w-11 rounded-full'/>
 
       <div className='flex flex-col gap-1 cursor-pointer'>
           <div className='text-lg font-semibold hover:text-headingColor text-textColor'>{name}</div>

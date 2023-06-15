@@ -2,12 +2,12 @@ import { getAuth } from "firebase/auth";
 import { AnimatePresence } from 'framer-motion';
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { Route, Routes, useNavigate,Navigate } from 'react-router-dom';
+import { Navigate, Route, Routes, useNavigate } from 'react-router-dom';
 
 
 import { ValidateUserLogin } from "./apis";
 import { Home, Login } from './componets';
-import { Home as DashboardHome, Songs ,Dashboard,Users } from './componets/admin';
+import { Dashboard } from './componets/admin';
 import { FirebaseApp } from './config/firebase';
 import { setUserData } from "./store/reducers";
 function App() {
@@ -51,7 +51,7 @@ function App() {
   }
   return (
     <AnimatePresence mode='wait'>
-      <div className="min-w-[680px] h-auto bg-primary">
+      <div className="min-w-[680px] h-screen bg-primary">
         <Routes>
           <Route exact path="/" 
            render={() => {

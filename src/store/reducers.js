@@ -16,6 +16,9 @@ export const userDataSlice = createSlice({
     setUserData: (state,action) => {
       state.user = action.payload
     }, 
+    setAllUserData: (state,action) => {
+      state.users = action.payload
+    }, 
     setSongs: (state,action) => {
       state.songs = action.payload
     },
@@ -32,6 +35,6 @@ export const userDataSlice = createSlice({
 })
 
 // Action creators are generated for each case reducer function
-export const { setUserData,setLoading } = userDataSlice.actions
+export const { setUserData,setLoading,setArtists,setSongs,setAlbums,setAllUserData } = userDataSlice.actions
 
 export default userDataSlice.reducer
