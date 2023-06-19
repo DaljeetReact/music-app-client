@@ -6,7 +6,7 @@ import { Navigate, Route, Routes, useNavigate } from 'react-router-dom';
 
 
 import { ValidateUserLogin } from "./apis";
-import { Home, Login } from './componets';
+import { Error404, Home, Login } from './componets';
 import { Dashboard } from './componets/admin';
 import { FirebaseApp } from './config/firebase';
 import { setUserData } from "./store/reducers";
@@ -65,6 +65,7 @@ function App() {
           <Route path='/home' element={<Home IsLoggedIn={IsLoggedIn} />} />
           <Route path='/login' element={<Login setIsLoggedIn={setIsLoggedIn} IsLoggedIn={IsLoggedIn} />} />
           <Route path='/dashboard/*' element={<Dashboard />} />
+          <Route path="*" element={<Error404 />} />
         </Routes>
       </div>
     </AnimatePresence>
