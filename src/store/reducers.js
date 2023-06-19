@@ -6,7 +6,13 @@ const initialState = {
  artists:[],
  songs:[],
  users:[],
- loading:false
+ loading:false,
+ filters:{
+    Artist: "",
+    Album: "",
+    Language: "",
+    Category: ""
+  }
 }
 
 export const userDataSlice = createSlice({
@@ -28,6 +34,12 @@ export const userDataSlice = createSlice({
     setAlbums: (state,action) => {
       state.albums = action.payload
     },
+    setGlobalFilters: (state,action) => {
+      let {name,val} = action.payload;
+      let update = state.filters
+          update = {...update,[name]:val};
+      state.filters = update;
+    },
     setLoading: (state,action)=>{
         state.loading = action.payload
     }
@@ -35,6 +47,6 @@ export const userDataSlice = createSlice({
 })
 
 // Action creators are generated for each case reducer function
-export const { setUserData,setLoading,setArtists,setSongs,setAlbums,setAllUserData } = userDataSlice.actions
+export const { setUserData,setLoading,setArtists,setSongs,setAlbums,setAllUserData,setGlobalFilters } = userDataSlice.actions
 
 export default userDataSlice.reducer
