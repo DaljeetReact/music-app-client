@@ -22,5 +22,4 @@ export const languages = [
     { _id: 4, name: "Telungu", value: "telungu" },
     { _id: 5, name: "Hindi", value: "hindi" },
     { _id: 6, name: "Italian", value: "italian" },
-
 ];
