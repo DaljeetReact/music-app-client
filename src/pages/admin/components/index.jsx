@@ -199,3 +199,16 @@ export const FileUploadComponent = ({uploadType,uploadPAth,uploadedFileURL,setUp
          </div>
     );
 }
+
+
+export const ObjectValidator =(data)=>{
+  let Errors = [];
+  for (const [key, value] of Object.entries(data)) {
+    console.log(`${key}: ${value}`);
+    if(value === null || value === ""){
+      Errors.push(key);
+    }
+  }
+  console.log({Errors});
+  return Errors;
+}
