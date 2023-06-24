@@ -86,7 +86,7 @@ function NewSong() {
   return (
     <div className='w-full m-auto border-2 mt-20 p-5 shadow-sm rounded-lg flex justify-between gap-4'>
       <div className='border-2 p-5 shadow-sm rounded-lg flex-1'>
-        <div className="text-center font-semibold text-2xl text-red-500 py-3 font-mono">Song</div>
+        <div className="text-center font-semibold text-2xl text-gray-500 py-3">Song</div>
         <div>
           <input type='text' placeholder='song name' value={songName}
             onChange={(e) => setsongName(e.target.value)}
@@ -129,14 +129,14 @@ function NewSong() {
       </div>
 
       <div className="flex-2">
-            <div className="flex gap-4 flex-col justify-between">
-                <div className='border-2 p-5 shadow-sm rounded-lg'>
-                    <div className="text-center font-semibold text-2xl text-red-500 py-3 font-mono">Artist</div>
+            <div className="flex gap-4 flex-col h-full">
+                <div className='border-2 p-5 shadow-sm rounded-lg h-full'>
+                    <div className="text-center font-semibold text-2xl text-gray-500 py-3 ">Artist</div>
                     <AddArtist/>
                 </div>
 
-                <div className='border-2 p-5 shadow-sm rounded-lg'>  
-                    <div className="text-center font-semibold text-2xl text-red-500 py-3 font-mono">Album</div>
+                <div className='border-2 p-5 shadow-sm rounded-lg h-full'>  
+                    <div className="text-center font-semibold text-2xl text-gray-500 py-3 ">Album</div>
                     <AddAlbum/>
                 </div>
             </div>

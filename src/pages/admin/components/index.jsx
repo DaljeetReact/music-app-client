@@ -44,7 +44,7 @@ export const FileUploadField  = ({setIsFileUploading,setUploadedFileURL,setProce
     return(
       <label className='flex flex-col items-center justify-center gap-2 h-full w-full'>
         <FaCloudUploadAlt className=' text-5xl text-gray-500' />
-        <p className=' text-lg'>Click here to Upload {isImage?"a Image":"an Audio"}</p>
+        <p className='px-4 text-sm'>Click here to Upload {isImage?"a Image":"an Audio"}</p>
           <input type='file'className='h-0 w-0'
             name='upload-file'
             accept={`${isImage?"image/*":"audio/*"}`}
