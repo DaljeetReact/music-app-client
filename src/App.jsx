@@ -6,8 +6,8 @@ import { Navigate, Route, Routes, useNavigate } from 'react-router-dom';
 
 
 import { ValidateUserLogin } from "./apis";
-import { Error404, Home, Login } from './componets';
-import { Dashboard } from './componets/admin';
+import { Error404, Home, Login } from './pages';
+import { Dashboard } from './pages/admin';
 import { FirebaseApp } from './config/firebase';
 import { setUserData } from "./store/reducers";
 function App() {

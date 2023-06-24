@@ -1,4 +1,4 @@
-import {useState} from "react";
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { FaChevronDown, FaCloudUploadAlt, FaMusic,FaTrash } from 'react-icons/fa';
 import { getDownloadURL, ref, uploadBytesResumable,deleteObject } from "firebase/storage";
@@ -7,11 +7,11 @@ import { useDispatch, useSelector } from 'react-redux';
 
 
 import { storage } from "../../../config/firebase.js";
-import { setGlobalFilters } from '../../../store/reducers';
-import { MenuItems } from '../../../utils/styles';
+import { setGlobalFilters } from '../../../store/reducers.js';
+import { MenuItems } from '../../../utils/styles.js';
 
 
-export const FileUploadFeild  = ({setIsFileUploading,setUploadedFileURL,setProcess,isImage,uploadPAth}) =>{
+export const FileUploadField  = ({setIsFileUploading,setUploadedFileURL,setProcess,isImage,uploadPAth}) =>{
 
     const handleUpload = (e) =>{
       setIsFileUploading(true);
@@ -172,7 +172,7 @@ export const FileUploadComponent = ({uploadType,uploadPAth,uploadedFileURL,setUp
         {!IsFileUploading&&(
           <>
             {!uploadedFileURL?(
-              <FileUploadFeild
+              <FileUploadField
                 setIsFileUploading={setIsFileUploading}
                 setUploadedFileURL={setUploadedFileURL}
                 setProcess={setProcess}

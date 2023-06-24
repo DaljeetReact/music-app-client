@@ -2,7 +2,7 @@ import React from 'react'
 import Header from '../Header';
 import { Route, Routes } from 'react-router-dom';
 import DashBoardMenu from './DashBoardMenu';
-import {Home,Users,Songs,Albums,Artists, NewSong} from './';
+import {Home,Users,Songs,Albums,Artists, NewSong} from '.';
 import Error404 from '../Error404';
 
 function Dashboard() {
