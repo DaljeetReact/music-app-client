@@ -11,22 +11,21 @@ import { setGlobalFilters } from '../../../store/reducers.js';
 import { MenuItems } from '../../../utils/styles.js';
 
 
-export const FileUploadField  = ({setIsFileUploading,setUploadedFileURL,setProcess,isImage,uploadPAth}) =>{
+export const FileUploadField  = ({setIsFileUploading,setUploadedFileURL,setProcess,isImage,uploadPAth,IsFileUploading}) =>{
 
-    const handleUpload = (e) =>{
+    const handleUpload = async (e) =>{
       setIsFileUploading(true);
       const file =  e.target.files[0];
-
       const storageRef =  ref(storage,`${uploadPAth}/${Date.now()}-${file.name}`);
 
       const uploadTask = uploadBytesResumable(storageRef, file);
+      
       uploadTask.on('state_changed', 
         (snapshot) => {
           // Observe state change events such as progress, pause, and resume
           // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
           const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
           setProcess(progress);
-          console.log('Upload is ' + progress + '% done');
         }, 
         (error) => {
           // Handle unsuccessful uploads
@@ -35,12 +34,12 @@ export const FileUploadField  = ({setIsFileUploading,setUploadedFileURL,setProce
         () => {
           getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
             setUploadedFileURL(downloadURL);
+            setIsFileUploading(false);
             console.log('File available at', downloadURL);
           });
         }
       );
-      setIsFileUploading(false);
-
+     
     } 
     return(
       <label className='flex flex-col items-center justify-center gap-2 h-full w-full'>
@@ -62,8 +61,6 @@ export const DropDown = ({ name, dataInfo, setFilters, Filters}) => {
     const selectedItems = useSelector(state => state.filters);
 
     const [isOpen, setIsOpen] = useState(false);
-
-    
 
     const HandleSelectedItems = (iteam) => {
       // set local state
@@ -141,23 +138,17 @@ export const ImageUploadingLoader = ({ process }) => {
 
 export const FileUploadComponent = ({uploadType,uploadPAth,uploadedFileURL,setUploadedFileURL}) =>{
 
-    const [IsFileUploading, setIsFileUploading] = useState(false);
+    const [IsFileUploading,setIsFileUploading] = useState(false);
     const [Process, setProcess] = useState(0);
 
-
     const deleteFile = (fileUrl,Path,isImage)=>{
-        if(isImage){
-          setIsFileUploading(true);
-        }
-    
+        setIsFileUploading(true);
         const deleteRef =  ref(storage,fileUrl);
         deleteObject(deleteRef).then(()=>{
           setUploadedFileURL(null);
           setIsFileUploading(false);
         }).catch(err=>console.log(err));
       }
-
-      
 
 
     return(
@@ -178,9 +169,11 @@ export const FileUploadComponent = ({uploadType,uploadPAth,uploadedFileURL,setUp
                 setProcess={setProcess}
                 isImage={uploadType==="image"?true:false}
                 uploadPAth={uploadPAth}
+                IsFileUploading={IsFileUploading}
               />
             ):(
               <div className='flex h-full w-full relative justify-center items-center bg-slate-400 rounded-lg overflow-hidden'>
+
                 {uploadType==="image"?(
                     <img src={uploadedFileURL}
                     referrerPolicy="no-referrer"
