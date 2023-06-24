@@ -68,7 +68,7 @@ function AddArtist() {
  
 
     return (
-        <div className='flex gap-4'>
+        <div className='flex gap-4 items-center'>
             <FileUploadComponent uploadType={"image"} uploadPAth={"/Artist"} uploadedFileURL={uploadedImageURL} setUploadedFileURL={setUploadedImageURL} />
             <div>
                 <div className='flex flex-col gap-4'>
