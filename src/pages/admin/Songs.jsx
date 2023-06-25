@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { NavLink } from 'react-router-dom';
 
 import { defaultMusicIcon } from '../../assets/img';
+import { DeleteFileFromFireStore } from './components';
 function Songs() {
 
   const songs =  useSelector(state=>state.songs);
@@ -13,22 +14,23 @@ function Songs() {
   const SongCard = ({song,key}) =>{
    const {name,imgUrl,songUrl,album,artist,category,_id} = song;
     return(
-      <motion.div className='p-2 border-2 rounded-lg shadow-lg max-w-[210px] max-h-[210px] flex justify-center items-center flex-col cursor-pointer' key={key}>
-        <motion.img 
+      <motion.div className='overflow-hidden border-2 rounded-lg shadow-lg max-w-[210px] max-h-[210px] flex justify-center items-center flex-col cursor-pointer relative' key={_id}>
+         <motion.img 
           whileHover={{scale:1.05}}
-          src={defaultMusicIcon}
-          className='w-[100px] object-contain'
+          src={imgUrl}
+          className='h-[150px] w-full object-contain'
         />
-        <div>
+        <div className='text-center leading-9 py-4'>
           <p>{name}</p>
           <p>{artist}</p>
         </div>
+        <DeleteFileFromFireStore url={imgUrl} type={"albums"} id={_id} songUrl={songUrl} />
       </motion.div>
     )
   }
 
   return (
-    <div className='w-[80%] m-auto border-2 mt-20 p-5 shadow-sm rounded-lg'>
+    <div className='w-[80%] m-auto border-2 mt-20 p-5 shadow-sm rounded-lg relative'>
       <div className='flex justify-between mb-5 items-center'>
         <span>Count: <b>{songs.length}</b></span>
         
@@ -52,7 +54,6 @@ function Songs() {
         ):(
           <div className='text-center'>No song found</div>
         )}
-
       </div>
     </div>
   )

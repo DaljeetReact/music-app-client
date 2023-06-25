@@ -2,6 +2,7 @@ import {useState} from 'react';
 import { useSelector } from 'react-redux';
 import { motion } from "framer-motion";
 import { NavLink } from 'react-router-dom';
+import { DeleteFileFromFireStore } from './components';
 
 
 function Albums() {
@@ -13,15 +14,16 @@ function Albums() {
   const Card = ({album,key}) =>{
    const {name,imgUrl,_id} = album;
     return(
-      <motion.div className='p-2 border-2 rounded-lg shadow-lg max-w-[210px] max-h-[210px] flex justify-center items-center flex-col cursor-pointer' key={_id}>
+      <motion.div className='overflow-hidden border-2 rounded-lg shadow-lg max-w-[210px] max-h-[210px] flex justify-center items-center flex-col cursor-pointer relative' key={_id}>
         <motion.img 
           whileHover={{scale:1.05}}
           src={imgUrl}
-          className='w-[100px] object-contain'
+          className='h-[150px] w-full object-contain'
         />
-        <div>
-          <p>{name}</p>
+        <div className='text-center leading-9 py-4'>
+          <p className='font-semibold'>{name}</p>
         </div>
+        <DeleteFileFromFireStore url={imgUrl} type={"albums"} id={_id}/>
       </motion.div>
     )
   }

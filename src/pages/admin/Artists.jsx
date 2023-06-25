@@ -3,53 +3,12 @@ import { useSelector } from 'react-redux';
 import { motion } from "framer-motion";
 import { NavLink } from 'react-router-dom';
 import { FaFacebook, FaTwitter, FaInstagram, FaTrash } from 'react-icons/fa';
+import { DeleteFileFromFireStore } from './components';
 
 
 function Artists() {
-
   const ArtistInfo = useSelector(state => state.artists);
   const [search, setSearch] = useState("");
-
-  const DeleteFileFromFireStore = ({url,type,id}) =>{
-    const [isDelete, setisDelete] = useState(false);
-
-    const DeleteFile = async()=>{
-
-    }
-     return(
-      <motion.div 
-        className={`${isDelete&&"absolute backdrop-blur-2xl top-0 right-0 bottom-0 left-0 rounded-lg p-4"} `}>
-        <div>
-          {isDelete?(
-            <motion.div
-             className='text-center'>
-              <p> Are you sure you want to delete this {type} ? </p>
-                <div className='flex gap-4 mt-3 justify-center'>
-                    <motion.div
-                      onClick={DeleteFile}
-                      whileTap={{ scale: 0.8 }}
-                      className="cursor-pointer bg-red-500 px-3 w-min-[20px] text-sm rounded-md shadow-sm">
-                        Yes
-                    </motion.div>
-
-                    <motion.div 
-                     whileTap={{ scale: 0.8 }}
-                     onClick={()=>setisDelete(false)}
-                     className="cursor-pointer bg-gray-500 px-3 w-min-[20px] text-sm rounded-md shadow-sm">
-                        No
-                    </motion.div>
-                </div>
-            </motion.div>
-          ):(
-              <span className="w-8 h-8 absolute top-2 right-2 rounded-full bg-red-500 flex justify-center items-center"> 
-                  <FaTrash onClick={()=>setisDelete(true)} className=' backdrop-blur-sm text-white' />
-              </span>
-          )}
-        </div>
-       
-      </motion.div>
-     )
-  }
 
   const Card = ({ artist, key }) => {
     const { name, imgUrl, facebook, twitter, instagram, _id } = artist;
@@ -67,11 +26,11 @@ function Artists() {
               <FaFacebook className='text-blue-500 cursor-pointer' />
             </a>
 
-            <a href={`https://www.facebook.com/${facebook}`} target='_blank'  rel="noreferrer">
+            <a href={`https://instagram.com/${instagram}`} target='_blank'  rel="noreferrer">
               <FaInstagram className='text-orange-400 cursor-pointer' />
             </a>
 
-            <a href={`https://www.facebook.com/${facebook}`} target='_blank' rel="noreferrer">
+            <a href={`https://twitter.com/${twitter}`} target='_blank' rel="noreferrer">
               <FaTwitter className='text-blue-500 cursor-pointer' />
             </a>
           </div>
