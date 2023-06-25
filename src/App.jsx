@@ -1,23 +1,24 @@
 import { getAuth } from "firebase/auth";
 import { AnimatePresence } from 'framer-motion';
 import { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Navigate, Route, Routes, useNavigate } from 'react-router-dom';
-
+import { motion } from "framer-motion";
 
 import { ValidateUserLogin } from "./apis";
 import { Error404, Home, Login } from './pages';
 import { Dashboard } from './pages/admin';
 import { FirebaseApp } from './config/firebase';
-import { setUserData } from "./store/reducers";
+import { setIsSongPlaying, setUserData } from "./store/reducers";
+import MusicPlayer from "./pages/MusicPlayer";
+
 function App() {
   const auth = getAuth(FirebaseApp);
   const checkAuth = false || (window.localStorage.getItem("auth")??false);
   const [IsLoggedIn, setIsLoggedIn] = useState(checkAuth);
   const navigate = useNavigate();
-
-  const dispatch = useDispatch()
-
+  const dispatch = useDispatch();
+  const isSongPlaying =   useSelector((state)=>state.isSongPlaying);
  
   useEffect(() => {   
     if(!IsLoggedIn){ 
@@ -26,7 +27,7 @@ function App() {
       return;
     }
     CheckAuthState();
-    console.log(" i am called");
+    dispatch(setIsSongPlaying(true));
   },[]);
 
   const CheckAuthState =  async () =>{
@@ -49,6 +50,7 @@ function App() {
       }
     });
   }
+
   return (
     <AnimatePresence mode='wait'>
       <div className="min-w-[680px] h-screen bg-primary">
@@ -67,6 +69,15 @@ function App() {
           <Route path='/dashboard/*' element={<Dashboard />} />
           <Route path="*" element={<Error404 />} />
         </Routes>
+          {(isSongPlaying && IsLoggedIn)&&(
+            <motion.div
+              initial={{opacity:0,y:50}}
+              animate={{opacity:1,y:0}}
+              className="fixed min-w-[700px] h-26 inset-x-0 bottom-0 bg-cardOverlay drop-shadow-2xl backdrop-blur-md items-center justify-center"
+            >
+              <MusicPlayer/> 
+            </motion.div>
+          )}
       </div>
     </AnimatePresence>
   );

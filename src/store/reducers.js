@@ -13,7 +13,7 @@ const initialState = {
     Language: "",
     Category: ""
   },
-  isSongPlaying:false,
+  isSongPlaying:true,
   songIndex:0
 }
 
