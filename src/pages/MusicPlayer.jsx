@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux'
 import { motion } from "framer-motion"
 import { RiPlayListLine } from 'react-icons/ri'
 import AudioPlayer from 'react-h5-audio-player';
-
+import "react-h5-audio-player/lib/styles.css";
 function MusicPlayer() {
 
     const { songs, isSongPlaying, songIndex } = useSelector(state => state);
@@ -13,7 +13,7 @@ function MusicPlayer() {
     }   
 
     const { songUrl, name, artist, album, imgUrl, category, language } = currentSongs;
-    console.log(songUrl);
+
     return (
         <div className="w-full flex items-center gap-4 overflow-hidden">
             <div className="w-full items-center gap-3 p-4 flex relative">
@@ -26,8 +26,7 @@ function MusicPlayer() {
                         <span className='text-base'>{album}</span>
                     </p>
                     <p className='text-textColor'>
-                        {artist}
-                        <span className='text-sm text-textColor font-semibold'>{category}</span>
+                        {artist}  <span className='text-[8px]  text-white font-semibold bg-red-500 p-1 rounded-md'>{category}</span>
                     </p>
                     <motion.i>
                         <RiPlayListLine className="text-textColor hover:text-headingColor text-3xl cursor-pointer" />
