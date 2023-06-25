@@ -12,7 +12,9 @@ const initialState = {
     Album: "",
     Language: "",
     Category: ""
-  }
+  },
+  isSongPlaying:false,
+  songIndex:0
 }
 
 export const userDataSlice = createSlice({
@@ -42,11 +44,17 @@ export const userDataSlice = createSlice({
     },
     setLoading: (state,action)=>{
         state.loading = action.payload
+    },
+    setIsSongPlaying: (state,action)=>{
+      state.isSongPlaying = action.payload
+    },
+    setSongIndex: (state,action)=>{
+      state.songIndex = action.payload
     }
   },
 })
 
 // Action creators are generated for each case reducer function
-export const { setUserData,setLoading,setArtists,setSongs,setAlbums,setAllUserData,setGlobalFilters } = userDataSlice.actions
+export const { setUserData,setLoading,setArtists,setSongs,setAlbums,setAllUserData,setGlobalFilters,setIsSongPlaying,setSongIndex } = userDataSlice.actions
 
 export default userDataSlice.reducer
