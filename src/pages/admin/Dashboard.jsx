@@ -7,7 +7,7 @@ import Error404 from '../Error404';
 
 function Dashboard() {
   return (
-    <div className='bg-primary pb-20 px-4'>
+    <div className='pb-20 px-4'>
      <Header/>
       <div className='w-[75%] m-auto  mt-20'>
         <DashBoardMenu/>

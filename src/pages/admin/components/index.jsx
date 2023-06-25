@@ -239,9 +239,10 @@ export const DeleteFileFromFireStore = ({ url, type, id, songUrl }) => {
 
   const deleteForBackEnd = async (id, type) => {
     let url = BackEndUrl[type]; // this will get the url form array base on type
-    setIsLoading(true);
-    await axios.delete(`${url}/${id}`).then(() => {
-      alert(`${type} has been successfully deleted from back-end`);
+     setIsLoading(true);
+    await axios.delete(`${url}/${id}`).then(({data}) => {
+      
+      alert(`${type} has been successfully deleted from back-end ${JSON.stringify(data)}`);
     }).catch(e => console.log(e)).finally(() => {
       setIsLoading(false);
     });

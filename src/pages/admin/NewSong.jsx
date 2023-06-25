@@ -84,7 +84,7 @@ function NewSong() {
 
 
   return (
-    <div className='w-full m-auto border-2 mt-20 p-5 shadow-sm rounded-lg flex justify-between gap-4'>
+    <div className='w-full m-auto border-2 mt-20 p-5 shadow-sm rounded-lg flex justify-between gap-4  backdrop-blur-xl'>
       <div className='border-2 p-5 shadow-sm rounded-lg flex-1'>
         <div className="text-center font-semibold text-2xl text-gray-500 py-3">Song</div>
         <div>

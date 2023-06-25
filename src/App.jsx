@@ -6,11 +6,10 @@ import { Navigate, Route, Routes, useNavigate } from 'react-router-dom';
 import { motion } from "framer-motion";
 
 import { ValidateUserLogin } from "./apis";
-import { Error404, Home, Login } from './pages';
+import { Error404, Home, Login,MusicPlayer } from './pages';
 import { Dashboard } from './pages/admin';
 import { FirebaseApp } from './config/firebase';
 import { setIsSongPlaying, setUserData } from "./store/reducers";
-import MusicPlayer from "./pages/MusicPlayer";
 
 function App() {
   const auth = getAuth(FirebaseApp);
@@ -53,7 +52,7 @@ function App() {
 
   return (
     <AnimatePresence mode='wait'>
-      <div className="min-w-[680px] h-screen bg-primary">
+      <div className={`min-w-[680px] h-screen bg-[url('./assets/img/bgapp.jpg')] bg-center bg-no-repeat bg-local bg-fixed pb-[1000px]`}>
         <Routes>
           <Route exact path="/" 
            render={() => {

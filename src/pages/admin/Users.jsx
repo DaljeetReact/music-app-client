@@ -22,7 +22,7 @@ function Users() {
 
   console.log(users);
   return (
-    <div className='w-[80%] m-auto border-2 mt-20 p-5 shadow-sm rounded-lg'>
+    <div className='w-[80%] m-auto border-2 mt-20 p-5 shadow-sm rounded-lg backdrop-blur-sm'>
       <div className='flex justify-between mb-5 items-center'>
         <span>Count: <b>{users.length}</b></span>
         <div>
