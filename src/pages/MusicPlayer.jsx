@@ -1,20 +1,37 @@
-import React,{useState} from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector} from 'react-redux'
 import { motion } from "framer-motion"
 import { RiPlayListLine } from 'react-icons/ri'
 import AudioPlayer from 'react-h5-audio-player';
 import "react-h5-audio-player/lib/styles.css";
+import { setIsSongPlaying, setSongIndex } from '../store/reducers';
 
-import {PlayList} from './index'
 function MusicPlayer({setLsPlayListOpen,isPlayListOpen}) {
+    const dispatch = useDispatch();
+    const { songs, songIndex,currentPlaylist } = useSelector(state => state);
+    const currentSongs = currentPlaylist.length > 0?currentPlaylist[songIndex]: songs[songIndex];
 
-    const { songs, isSongPlaying, songIndex } = useSelector(state => state);
-    const currentSongs = songs[songIndex];
+    const playNextSong = ()=>{
+        let newIndex = 0;
+        if((currentPlaylist.length -1 ) > songIndex){
+            newIndex = songIndex+1;
+        }        
+        dispatch(setSongIndex(newIndex));
+    }
+  
+    const playPreviousSong = ()=>{
+        let newIndex = 0;
+        if( songIndex !== 0){
+            newIndex = songIndex-1;
+        }else{
+            newIndex = currentPlaylist.length -1; // sent to last index
+        }
+        dispatch(setSongIndex(newIndex));
+    }
+    const { songUrl, name, artist, album, imgUrl, category, language } = currentSongs;
+
     if (!currentSongs) {
         return;
-    }   
-
-    const { songUrl, name, artist, album, imgUrl, category, language } = currentSongs;
+    }  
 
     return (
         <div className='relative'>
@@ -37,9 +54,12 @@ function MusicPlayer({setLsPlayListOpen,isPlayListOpen}) {
                     </div>
                     <div className='flex-1'>
                         <AudioPlayer
-                            autoPlay={false}
+                            autoPlay={true}
                             src={songUrl}
-                            onPlay={e => console.log("onPlay")}
+                            onPlay={(e) =>dispatch(setIsSongPlaying(true))}
+                            onClickNext={playNextSong}
+                            onClickPrevious={playPreviousSong}
+                            onPause={(e)=>dispatch(setIsSongPlaying(false))}
                             showSkipControls={true}
                         />
                     </div>

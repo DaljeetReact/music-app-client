@@ -1,12 +1,45 @@
 import { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
+import { RiPlayListAddLine,RiHeartLine } from 'react-icons/ri';
+
+
+
 
 import CardInfo from './components/CardInfo'
+import { AddSongToPlayList } from '../../store/reducers';
 function Songs() {
 
-  const songs = useSelector(state => state.songs);
+  const {songs,currentPlaylist} = useSelector(state => state);
+  const dispatch = useDispatch();
   const [search, setSearch] = useState("");
+
+  const pushToPlayList = (song)=>{
+    let list = [...currentPlaylist];
+    let found = Object.values(list).find((obj) => {
+      return obj._id === song._id
+    });
+    
+    if (!found) {
+       list.push(song);
+       dispatch(AddSongToPlayList(list));
+    }
+    
+  }
+  const SongAttributes = ({song})=>{
+    return(
+      <div className='absolute top-2 left-1 flex flex-col gap-1' key={`list-atrr${song._id}`}>
+        <span className='w-8 h-8 rounded-full bg-red-500 flex justify-center items-center shadow-md'
+          onClick={()=>pushToPlayList(song)}
+        >
+           <RiPlayListAddLine className='text-white' />
+        </span>
+        <span className='w-8 h-8 rounded-full bg-red-500 flex justify-center items-center shadow-md'>
+           <RiHeartLine className='text-white' />
+        </span>
+      </div>
+    )
+  }
 
   return (
     <div className='w-[80%] m-auto border-1 border-black mt-20 p-5 shadow-sm rounded-xl relative  backdrop-blur-3xl overflow-hidden '>
@@ -25,13 +58,14 @@ function Songs() {
 
       </div>
 
-      <div className='grid grid-cols-4 gap-4 relative'>
+      <div className='grid grid-cols-4 gap-4 relative items-center justify-center'>
         {songs.length > 0 ? (
           <>
             {songs?.map((song, index) => (
               <CardInfo imgUrl={song.imgUrl} key={song._id} type={"album"}>
                 <p>{song.name}</p>
                 <p>{song.artist}</p>
+                <SongAttributes song={song} key={index}/>
               </CardInfo>
             ))}
           </>

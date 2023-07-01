@@ -71,7 +71,7 @@ function App() {
           <Route path='/dashboard/*' element={<Dashboard />} />
           <Route path="*" element={<Error404 />} />
         </Routes>
-          {(isSongPlaying && IsLoggedIn)&&(
+          {(IsLoggedIn)&&(
             <motion.div
               initial={{opacity:0,y:50}}
               animate={{opacity:1,y:0}}
@@ -81,7 +81,7 @@ function App() {
             </motion.div>
           )}
 
-           {isPlayListOpen&&(
+           {(isPlayListOpen&& IsLoggedIn)&&(
               <PlayList setLsPlayListOpen={setLsPlayListOpen} isPlayListOpen={isPlayListOpen}/>
             )}
       </div>

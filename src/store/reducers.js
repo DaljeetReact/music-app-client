@@ -53,7 +53,7 @@ export const userDataSlice = createSlice({
       state.songIndex = action.payload
     },
     AddSongToPlayList : (state,action)=>{
-      state.currentPlaylist = action.currentPlaylist
+      state.currentPlaylist = action.payload
     }
   },
 });

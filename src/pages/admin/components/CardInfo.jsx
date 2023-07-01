@@ -6,7 +6,7 @@ import { DeleteFileFromFireStore } from '../components';
 function CardInfo({imgUrl,_id,type,children}) {
     const role =  useSelector(state=>state.user?.role);
   return (
-    <motion.div className='overflow-hidden border-1 bg-white rounded-lg shadow-lg max-w-[210px] max-h-auto flex justify-center  items-center flex-col cursor-pointer relative' key={_id}>
+    <motion.div className='overflow-hidden border-1 bg-white rounded-lg shadow-lg  max-h-auto flex justify-center  items-center flex-col cursor-pointer relative' key={_id}>
         <motion.img 
           whileHover={{scale:1.05,borderBottomLeftRadius:'20px',borderBottomRightRadius:'20px'}}
           src={imgUrl}

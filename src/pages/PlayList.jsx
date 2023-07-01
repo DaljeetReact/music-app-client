@@ -1,10 +1,18 @@
 import React from 'react'
 import { motion } from 'framer-motion'
 import { AiOutlineLeft } from 'react-icons/ai'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import {RiMusic2Line,RiPauseCircleFill} from 'react-icons/ri'
+import { setSongIndex } from '../store/reducers'
 
 function PlayList({setLsPlayListOpen,isPlayListOpen}) {
-   const currentPlaylist =  useSelector(state=>state.currentPlaylist);
+   const {currentPlaylist,songIndex,isSongPlaying} =  useSelector(state=>state);
+   const dispatch =  useDispatch()
+
+   const selectSong = (index)=>{
+        dispatch(setSongIndex(index));
+   }
+
   return (
     <motion.div 
      initial={{ opacity: 0,x:50 }}
@@ -24,7 +32,31 @@ function PlayList({setLsPlayListOpen,isPlayListOpen}) {
     </div>
        
         <div className="overflow-y-scroll h-full">
-            <h4>ekmf</h4>
+        {currentPlaylist?.length > 0 ?(
+            <ul>
+                {currentPlaylist.map(((song,index)=>(
+                    <li className='flex w-fll bg-transparent p-3 gap-2 items-center border-b-[1px] border-black hover:bg-gray-300' key={`pl_list${song._id}`}
+                        onClick={()=>selectSong(index)}
+                    >
+                        
+                       {(index === songIndex && isSongPlaying)?(
+                            <RiPauseCircleFill className="text-red-800"/>
+                        ):(
+                            <RiMusic2Line/>
+                        )}
+                        
+                        {song.name}
+                        
+                    </li>
+                )))}
+            </ul>
+        ):(
+            <div className='text-center px-5'>
+                No song found <br/> please add some song to list
+            </div>
+        )}
+           
+           
         </div>
     </motion.div>
   )
