@@ -251,8 +251,8 @@ export const DeleteFileFromFireStore = ({ url, type, id, songUrl }) => {
 
   return (
     <motion.div
-      className={`${isDelete && "absolute backdrop-blur-3xl top-0 right-0 bottom-0 left-0 rounded-lg p-4"} `} key={id}>
-      <div>
+      className={`${isDelete && "absolute backdrop-blur-3xl top-0 right-0 bottom-0 left-0 rounded-lg p-4 flex items-center justify-center"} `} key={id}>
+      <div >
         {isDelete ? (
           <motion.div
             className='text-center'>

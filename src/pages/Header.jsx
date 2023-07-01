@@ -48,8 +48,8 @@ function Header() {
       <img src={imgUrl} referrerPolicy="no-referrer" alt={name} className='w-11 rounded-full'/>
 
       <div className='flex flex-col gap-1 cursor-pointer'>
-          <div className='text-lg font-semibold hover:text-headingColor text-textColor'>{name}</div>
-          <div className='flex text-xs text-gray-500 gap-2'>Premium Member <FaCrown className=' text-orange-400'/></div>
+          <div className='text-lg font-semibold hover:text-headingColor text-white'>{name}</div>
+          <div className='flex text-xs text-gray-200 gap-2'>Premium Member <FaCrown className=' text-orange-400'/></div>
       </div>
       {isMenu&&(
         <motion.div 
