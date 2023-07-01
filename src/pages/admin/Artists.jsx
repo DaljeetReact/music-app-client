@@ -10,8 +10,9 @@ function Artists() {
   const [search, setSearch] = useState("");
 
   return (
-    <div className='w-[80%] m-auto border-2 mt-20 p-5 shadow-sm rounded-lg  backdrop-blur-xl'>
-      <div className='flex justify-between mb-5 items-center'>
+    <div className='w-[80%] m-auto border-1 border-black mt-20 p-5 shadow-sm rounded-xl relative  backdrop-blur-3xl overflow-hidden '>
+    <div className="absolute top-0 bottom-0 left-0 right-0  bg-white opacity-[0.5]"></div>
+      <div className='flex justify-between mb-5 items-center relative z-10'>
         <span>Count: <b>{ArtistInfo.length}</b></span>
 
         <div className='gap-2 flex '>

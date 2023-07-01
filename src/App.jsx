@@ -52,7 +52,7 @@ function App() {
 
   return (
     <AnimatePresence mode='wait'>
-      <div className={`min-w-[680px] h-screen bg-[url('./assets/img/bgapp.jpg')] bg-center bg-no-repeat bg-local bg-fixed pb-[1000px]`}>
+      <div className={`min-w-[680px] h-vh bg-[url('./assets/img/as.jpg')] bg-cover bg-no-repeat bg-fixed pb-[100px]`}>
         <Routes>
           <Route exact path="/" 
            render={() => {
