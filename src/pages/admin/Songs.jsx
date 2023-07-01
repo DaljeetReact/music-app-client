@@ -3,8 +3,8 @@ import { useSelector } from 'react-redux';
 import { motion } from "framer-motion";
 import { NavLink } from 'react-router-dom';
 
-import { defaultMusicIcon } from '../../assets/img';
 import { DeleteFileFromFireStore } from './components';
+import CardInfo from './components/CardInfo'
 function Songs() {
 
   const songs =  useSelector(state=>state.songs);
@@ -48,7 +48,12 @@ function Songs() {
       <div className='grid grid-cols-4 gap-4   '>
         {songs.length > 0 ?(
           <>
-            {songs?.map((song,index)=>(<SongCard song={song} key={song._id}/>))}
+            {songs?.map((song,index)=>(
+              <CardInfo imgUrl={song.imgUrl} key={song._id} type={"album"}>
+                 <p>{song.name}</p>
+                 <p>{song.artist}</p>
+              </CardInfo>
+            ))}
           </>
           
         ):(

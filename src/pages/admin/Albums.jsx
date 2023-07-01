@@ -1,8 +1,8 @@
 import {useState} from 'react';
 import { useSelector } from 'react-redux';
-import { motion } from "framer-motion";
 import { NavLink } from 'react-router-dom';
-import { DeleteFileFromFireStore } from './components';
+
+import CardInfo from "./components/CardInfo"
 
 
 function Albums() {
@@ -10,23 +10,6 @@ function Albums() {
   const albumsInfo =  useSelector(state=>state.albums);
   const [search, setSearch] = useState("");
 
-
-  const Card = ({album,key}) =>{
-   const {name,imgUrl,_id} = album;
-    return(
-      <motion.div className='overflow-hidden border-2 rounded-lg shadow-lg max-w-[210px] max-h-[210px] flex justify-center items-center flex-col cursor-pointer relative' key={_id}>
-        <motion.img 
-          whileHover={{scale:1.05}}
-          src={imgUrl}
-          className='h-[150px] w-full object-contain'
-        />
-        <div className='text-center leading-9 py-4'>
-          <p className='font-semibold'>{name}</p>
-        </div>
-        <DeleteFileFromFireStore url={imgUrl} type={"albums"} id={_id}/>
-      </motion.div>
-    )
-  }
 
   return (
     <div className='w-[80%] m-auto border-2 mt-20 p-5 shadow-sm rounded-lg  backdrop-blur-xl'>
@@ -44,14 +27,18 @@ function Albums() {
         
       </div>
 
-      <div className='grid grid-cols-4 gap-4   '>
+      <div className='grid grid-cols-4 gap-4 justify-center items-center '>
         {albumsInfo.length > 0 ?(
           <>
-            {albumsInfo?.map((album,index)=>(<Card album={album} key={album._id}/>))}
+            {albumsInfo?.map((album,index)=>(
+              <CardInfo imgUrl={album.imgUrl} key={album._id} type={"album"}>
+                <h3>{album.name}</h3>
+              </CardInfo>
+            ))}
           </>
           
         ):(
-          <div className='text-center'>No song found</div>
+          <div className='text-center'>No Album found</div>
         )}
 
       </div>
