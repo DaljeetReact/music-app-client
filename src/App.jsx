@@ -6,7 +6,7 @@ import { Navigate, Route, Routes, useNavigate } from 'react-router-dom';
 import { motion } from "framer-motion";
 
 import { ValidateUserLogin } from "./apis";
-import { Error404, Home, Login,MusicPlayer } from './pages';
+import { Error404, Home, Login,MusicPlayer,PlayList } from './pages';
 import { Dashboard } from './pages/admin';
 import { FirebaseApp } from './config/firebase';
 import { setIsSongPlaying, setUserData } from "./store/reducers";
@@ -15,6 +15,8 @@ function App() {
   const auth = getAuth(FirebaseApp);
   const checkAuth = false || (window.localStorage.getItem("auth")??false);
   const [IsLoggedIn, setIsLoggedIn] = useState(checkAuth);
+  const [isPlayListOpen, setLsPlayListOpen] = useState(true);
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const isSongPlaying =   useSelector((state)=>state.isSongPlaying);
@@ -75,9 +77,13 @@ function App() {
               animate={{opacity:1,y:0}}
               className="fixed min-w-[700px] h-26 inset-x-0 bottom-0 bg-cardOverlay drop-shadow-2xl backdrop-blur-md items-center justify-center"
             >
-              <MusicPlayer/> 
+              <MusicPlayer isPlayListOpen={isPlayListOpen} setLsPlayListOpen={setLsPlayListOpen}/> 
             </motion.div>
           )}
+
+           {isPlayListOpen&&(
+              <PlayList setLsPlayListOpen={setLsPlayListOpen} isPlayListOpen={isPlayListOpen}/>
+            )}
       </div>
     </AnimatePresence>
   );
