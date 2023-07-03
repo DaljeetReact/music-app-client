@@ -72,7 +72,7 @@ export const DropDown = ({ name, dataInfo, setFilters, Filters }) => {
     //Dispatch action
     dispatch(setGlobalFilters({
       name: name,
-      val: onlyif.includes(name) ? iteam._id : iteam.name
+      val: iteam.name
     }));
 
     //change State to normal
@@ -81,7 +81,7 @@ export const DropDown = ({ name, dataInfo, setFilters, Filters }) => {
 
   const isActive = (data, name) => {
     let classNa = `${MenuItems} py-4 px-2 flex flex-row items-center gap-2`;
-    if ((onlyif.includes(name) && selectedItems[name] === data._id) || (selectedItems[name] === data.name)) { // check for artist and album drop down 
+    if ((selectedItems[name] === data.name)) { // check for artist and album drop down 
       return `${classNa} border-l-2  bg-red-500 text-white`;
     } else {
       return `${classNa}`;

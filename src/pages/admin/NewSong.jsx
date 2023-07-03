@@ -23,7 +23,7 @@ function NewSong() {
   const [songName, setsongName] = useState("");
   const [uploadedImageURL, setUploadedImageURL] = useState(null);
   const [uploadedAudioURL, setUploadedAudioURL] = useState(null);
-  const [Filters, SetFilters] = useState(filtersInit);
+  const [Filters, SetFilters] = useState(filters);
   // Song uploading Form Data
 
   const handleUploadingSong =  async ()=>{
