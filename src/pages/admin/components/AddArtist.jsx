@@ -17,7 +17,6 @@ function AddArtist() {
 
     const [uploadedImageURL, setUploadedImageURL] = useState(null);
     const [IsLoading, setIsLoading] = useState(false);
-    const [msg, SetMsg] = useState("");
     const [ArtitsFields, setArtitsFields] = useState(artistInit);
 
     const handleOnChange = (e) =>{
@@ -43,7 +42,7 @@ function AddArtist() {
         console.log(ArtitsFields);
         axios.post(artistApi,ArtitsFields).then(({data})=>{
             if(data.status === 201){
-                SetMsg("Artist has been added");
+                toast.success("Artist has been added");
                 setArtitsFields(artistInit);
                 setUploadedImageURL(null);
             }
@@ -51,13 +50,6 @@ function AddArtist() {
             setIsLoading(false);
         })
     }
-
-    useEffect(() => {
-        setTimeout(() => {
-            SetMsg("");
-        }, 3000);
-    }, [msg]);
-
 
     useEffect(() => {
         setArtitsFields(prev => ({
@@ -87,13 +79,6 @@ function AddArtist() {
                     />
                 </div>
                 <div className="mt-5 text-center p-4">
-                    {msg.length > 0 && (
-                        <motion.div
-                            animate={{ opacity: 1, transition: { duration: 2 } }} initial={{ opacity: 0 }}
-                            className='my-4 text-center text-'>{msg}</motion.div>
-                    )}
-
-
                     <button type="button" class="py-2.5 px-5 mr-2 text-sm font-medium text-gray-900 bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700 inline-flex items-center"
                         onClick={saveArtist}
                         disabled={IsLoading ? true : false}
