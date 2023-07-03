@@ -1,18 +1,37 @@
 import { useState,useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { FaFacebook, FaTwitter, FaInstagram } from 'react-icons/fa';
+import { RiPlayListAddLine,RiHeartLine } from 'react-icons/ri';
 import axios from 'axios';
-
 
 import {songsApi} from '../../utils/index'
 import CardInfo from './components/CardInfo'
+import { AddSongToPlayList } from '../../store/reducers';
 
 function Artists() {
-  const ArtistInfo = useSelector(state => state.artists);
+  const { artists} = useSelector(state => state);
   const [search, setSearch] = useState("");
   const [fullArtistDetails, setFullArtistDetails] = useState([]);
   const [isLoading, setisLoading] = useState(false);
+
+  const dispatch =  useDispatch();
+  
+  const pushToPlayList = (songList)=>{
+    dispatch(AddSongToPlayList(songList));
+  }
+
+  const SongAttributes = ({song})=>{
+    return(
+      <div className='absolute top-2 left-1 flex flex-col gap-1' key={`list-atrr${song._id}`}>
+        <span className='w-8 h-8 rounded-full bg-red-500 flex justify-center items-center shadow-md'
+          onClick={()=>pushToPlayList(song)}
+        >
+           <RiPlayListAddLine className='text-white' />
+        </span>
+      </div>
+    )
+  }
    
   useEffect(() => {
     //self Calling async function
@@ -21,7 +40,7 @@ function Artists() {
       setFullArtistDetails([]);
       let data = [];
       // set fullArtistDetails to empty before new push
-      for(const artist of ArtistInfo){
+      for(const artist of artists){
         try{
           let response = await axios.get(`${songsApi}/artist/${artist.name}`);
           data.push({...artist,songsList:response?.data?.data}); //pushing data into array
@@ -75,6 +94,7 @@ function Artists() {
                     <FaTwitter className='text-blue-500 cursor-pointer' />
                   </a>
                 </div>
+                <SongAttributes song={artist?.songsList}/>
               </CardInfo>
             ))}
           </>
