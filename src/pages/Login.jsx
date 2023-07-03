@@ -66,10 +66,10 @@ function Login({ setIsLoggedIn, IsLoggedIn }) {
 
 
   return (
-    <div className="relative h-screen w-screen">
+    <div className="relative h-vh w-full">
     <video
       src={LoginBg}
-      autoPlay muted loop className="w-full h-full object-cover"
+      autoPlay muted loop className="w-full h-vh object-cover"
     />
       <di className="absolute inset-0 justify-center flex items-center p-4 bg-darkOverlay">
         <div className="w-full md:w-375 p-4 bg-lightOverlay shadow-2xl rounded-md backdrop-blur-md flex flex-col items-center justify-center">

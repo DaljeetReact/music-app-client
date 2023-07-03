@@ -27,11 +27,12 @@ function MusicPlayer({setLsPlayListOpen,isPlayListOpen}) {
         }
         dispatch(setSongIndex(newIndex));
     }
-    const { songUrl, name, artist, album, imgUrl, category, language } = currentSongs;
 
-    if (!currentSongs) {
+    if (!currentSongs ) {
         return;
     }  
+
+    const { songUrl, name, artist, album, imgUrl, category, language } = currentSongs;
 
     return (
         <div className='relative'>

@@ -15,7 +15,7 @@ function App() {
   const auth = getAuth(FirebaseApp);
   const checkAuth = false || (window.localStorage.getItem("auth")??false);
   const [IsLoggedIn, setIsLoggedIn] = useState(checkAuth);
-  const [isPlayListOpen, setLsPlayListOpen] = useState(true);
+  const [isPlayListOpen, setLsPlayListOpen] = useState(false);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -58,13 +58,8 @@ function App() {
       <div className="bg-[url('./assets/img/as.jpg')] bg-cover bg-no-repeat bg-fixed fixed top-0 bottom-0 right-0 left-0 z-[-1]"></div>
         <Routes>
           <Route exact path="/" 
-           render={() => {
-                    return (
-                      IsLoggedIn?
-                      <Navigate to="/home" replace={true} /> :
-                      <Navigate to="/login"  replace={true} /> 
-                    )
-                }}
+          element={IsLoggedIn? <Navigate to="/home" replace={true} /> :<Navigate to="/login"  replace={true} /> }
+
            />
           <Route path='/home' element={<Home IsLoggedIn={IsLoggedIn} />} />
           <Route path='/login' element={<Login setIsLoggedIn={setIsLoggedIn} IsLoggedIn={IsLoggedIn} />} />

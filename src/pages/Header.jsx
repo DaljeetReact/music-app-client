@@ -22,6 +22,7 @@ function Header() {
   const Logout = () =>{
     FireAuth.signOut().then(()=>{
       window.localStorage.setItem('auth',false);
+      window.localStorage.removeItem('persist:root');      
     }).catch(e=>console.log(e));
     navigator("/login",{replace:true})
   }
