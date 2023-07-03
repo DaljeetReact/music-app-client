@@ -1,7 +1,7 @@
 import { AnimatePresence } from 'framer-motion';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { Navigate, Route, Routes, useNavigate } from 'react-router-dom';
+import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
 import { motion } from "framer-motion";
 // Adding Toster notification
 import { ToastContainer} from 'react-toastify';
@@ -11,11 +11,16 @@ import { Dashboard } from './pages/admin';
 
 function App() {
 
+  const hidePlayerIfPage = ["/dashboard/add-song"];
+
   const [isPlayListOpen, setLsPlayListOpen] = useState(false);
 
-  const {auth} =  useSelector(state=>state)
- 
+  const {auth} =  useSelector(state=>state);
 
+  const location = useLocation();
+
+  const hidePlayer =  !hidePlayerIfPage.includes(location.pathname);
+  
   return (
     <AnimatePresence mode='wait'>
       <div className={`min-w-[680px] h-vh  pb-[100px]`}>
@@ -30,7 +35,7 @@ function App() {
           <Route path='/dashboard/*' element={<Dashboard />} />
           <Route path="*" element={<Error404 />} />
         </Routes>
-          {(auth)&&(
+          {(auth && hidePlayer)&&(
             <motion.div
               initial={{opacity:0,y:50}}
               animate={{opacity:1,y:0}}
@@ -40,7 +45,7 @@ function App() {
             </motion.div>
           )}
 
-           {(isPlayListOpen&& auth)&&(
+           {(isPlayListOpen && auth)&&(
               <PlayList setLsPlayListOpen={setLsPlayListOpen} isPlayListOpen={isPlayListOpen}/>
             )}
       </div>
