@@ -1,9 +1,10 @@
 import React from 'react'
 import { motion } from 'framer-motion'
-import { AiOutlineLeft } from 'react-icons/ai'
-import { useDispatch, useSelector } from 'react-redux'
+import { AiOutlineLeft,AiFillDelete } from 'react-icons/ai'
 import {RiMusic2Line,RiPauseCircleFill} from 'react-icons/ri'
-import { setSongIndex } from '../store/reducers'
+import { useDispatch, useSelector } from 'react-redux'
+import { setSongIndex,AddSongToPlayList, setIsSongPlaying } from '../store/reducers'
+import { toast } from 'react-toastify'
 
 function PlayList({setLsPlayListOpen,isPlayListOpen}) {
    const {currentPlaylist,songIndex,isSongPlaying} =  useSelector(state=>state);
@@ -11,6 +12,14 @@ function PlayList({setLsPlayListOpen,isPlayListOpen}) {
 
    const selectSong = (index)=>{
         dispatch(setSongIndex(index));
+   }
+
+   const removeSong = (id)=>{
+
+    let list = [...currentPlaylist];
+        list = list.filter((songs)=>songs._id !== id);
+       dispatch(AddSongToPlayList(list));
+       toast.success(`songs has been remove from Playlist`);
    }
 
   return (
@@ -35,17 +44,20 @@ function PlayList({setLsPlayListOpen,isPlayListOpen}) {
         {currentPlaylist?.length > 0 ?(
             <ul>
                 {currentPlaylist.map(((song,index)=>(
-                    <li className='flex w-fll bg-transparent p-3 gap-2 items-center border-b-[1px] border-black hover:bg-gray-300' key={`pl_list${song._id}`}
+                    <li className='flex justify-between w-fll bg-transparent p-3 gap-2 items-center border-b-[1px] border-black hover:bg-gray-300' key={`pl_list_${index}_${song._id}`}
                         onClick={()=>selectSong(index)}
                     >
-                        
-                       {(index === songIndex && isSongPlaying)?(
-                            <RiPauseCircleFill className="text-red-800"/>
-                        ):(
+                        <span className='flex items-center gap-2'>
                             <RiMusic2Line/>
-                        )}
-                        
-                        {song.name}
+                            {song.name}
+                        </span>
+                        <span>
+                            {(index === songIndex && isSongPlaying)?(
+                                <RiPauseCircleFill className="text-red-800"/>
+                            ):(
+                                <AiFillDelete onClick={()=>removeSong(song._id)}/>
+                            )}
+                        </span>
                         
                     </li>
                 )))}
