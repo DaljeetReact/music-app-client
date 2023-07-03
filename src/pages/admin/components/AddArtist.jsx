@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import axios from 'axios';
 
 import { artistApi } from '../../../utils';
+import { toast } from 'react-toastify';
 
 const artistInit = {
     name: "",
@@ -30,11 +31,11 @@ function AddArtist() {
         setIsLoading(true);
         const Errors = ObjectValidator(ArtitsFields);
         if (Errors.length > 0) {
-            let errmsg = `Total ${(Errors.length)} need to fill \n`;
             Errors.forEach(val => {
-                errmsg += `Please add the value for ${val} \n`;
+               let errmsg = `Please add the value for ${val} \n`;
+               toast.error(errmsg);
+
             })
-            alert(errmsg);
             setIsLoading(false);
             return false;
         }
