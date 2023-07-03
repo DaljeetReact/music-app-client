@@ -1,13 +1,14 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
-import { RiPlayListAddLine,RiHeartLine } from 'react-icons/ri';
+import { RiPlayListAddLine } from 'react-icons/ri';
 import axios from 'axios';
 
 
 import CardInfo from "./components/CardInfo"
 import { songsApi } from '../../utils/index'
 import { AddSongToPlayList } from '../../store/reducers';
+import { toast } from 'react-toastify';
 
 
 function Albums() {
@@ -21,6 +22,7 @@ function Albums() {
  
   const pushToPlayList = (songList)=>{
     dispatch(AddSongToPlayList(songList));
+    toast.info(`${songList?.length} songs has been added to the list`);
   }
 
 

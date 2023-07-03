@@ -2,8 +2,10 @@ import { useState,useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { FaFacebook, FaTwitter, FaInstagram } from 'react-icons/fa';
-import { RiPlayListAddLine,RiHeartLine } from 'react-icons/ri';
+import { RiPlayListAddLine } from 'react-icons/ri';
 import axios from 'axios';
+import { toast} from 'react-toastify';
+
 
 import {songsApi} from '../../utils/index'
 import CardInfo from './components/CardInfo'
@@ -19,6 +21,7 @@ function Artists() {
   
   const pushToPlayList = (songList)=>{
     dispatch(AddSongToPlayList(songList));
+    toast.info(`${songList?.length} songs has been added to the list`);
   }
 
   const SongAttributes = ({song})=>{

@@ -8,6 +8,7 @@ import { RiPlayListAddLine,RiHeartLine } from 'react-icons/ri';
 
 import CardInfo from './components/CardInfo'
 import { AddSongToPlayList } from '../../store/reducers';
+import { toast } from 'react-toastify';
 function Songs() {
 
   const {songs,currentPlaylist} = useSelector(state => state);
@@ -23,6 +24,8 @@ function Songs() {
     if (!found) {
        list.push(song);
        dispatch(AddSongToPlayList(list));
+       toast.success(`songs has been added to the Playlist`);
+
     }
     
   }
