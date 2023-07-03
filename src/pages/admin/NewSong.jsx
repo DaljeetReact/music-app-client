@@ -8,6 +8,7 @@ import { DropDown, FileUploadComponent,ObjectValidator } from "./components/inde
 import { songsApi } from '../../utils';
 import AddArtist from './components/AddArtist';
 import AddAlbum from './components/AddAlbum';
+import { toast } from 'react-toastify';
 let filtersInit = {
   Artist: "",
   Album: "",
@@ -23,7 +24,6 @@ function NewSong() {
   const [uploadedImageURL, setUploadedImageURL] = useState(null);
   const [uploadedAudioURL, setUploadedAudioURL] = useState(null);
   const [Filters, SetFilters] = useState(filtersInit);
-  const [msg ,SetMsg] = useState("hello i am done");
   // Song uploading Form Data
 
   const handleUploadingSong =  async ()=>{
@@ -42,11 +42,12 @@ function NewSong() {
     const  validationErrors = ObjectValidator(data);
 
     if(validationErrors.length > 0){
-      let errmsg = `Total ${(validationErrors.length)} need to fill \n`;
+     
       validationErrors.forEach(val=>{
-        errmsg +=`Please add the value for ${val} \n`; 
+        let errmsg =`Please add the value for ${val} \n`; 
+        toast.error(errmsg);
       })
-      alert(errmsg);
+      
       setIsLoading(false);
       return false;
     }
@@ -54,7 +55,7 @@ function NewSong() {
    await axios.post(`${songsApi}`,data).then(({data})=>{
       if(data.status === 201){
         resetSongForm();
-        SetMsg("Song Has bee Successfully uploaded ");
+        toast.success("Song Has bee Successfully uploaded ");
       }
     }).catch(e=>console.log(e)).finally(()=>{
         setIsLoading(false);
@@ -67,10 +68,6 @@ function NewSong() {
     setsongName("");
     setUploadedImageURL(null);
     SetFilters(filtersInit);
-
-    setTimeout(()=>{
-      SetMsg("");
-    },2000)
   }
 
   useEffect(()=>{
@@ -105,13 +102,7 @@ function NewSong() {
         <FileUploadComponent uploadType={"audio"} uploadPAth={"songs/Audio"} uploadedFileURL={uploadedAudioURL} setUploadedFileURL={setUploadedAudioURL} />
       
         <div className="mt-5 text-center p-4">
-          {msg.length > 0&&(
-            <motion.div 
-            animate={{ opacity: 1, transition: { duration: 2, delay: 1 } }} initial={{ opacity: 0 }}
-            className='my-4 text-center text-'>{msg}</motion.div>
-          )}
           
-
           <button  type="button" class="py-2.5 px-5 mr-2 text-sm font-medium text-gray-900 bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700 inline-flex items-center" 
             onClick={handleUploadingSong}
             disabled={IsLoading?true:false}
