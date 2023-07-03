@@ -62,7 +62,9 @@ function Songs() {
         {songs.length > 0 ? (
           <>
             {songs?.map((song, index) => (
-              <CardInfo imgUrl={song.imgUrl} key={song._id} type={"album"}>
+              <CardInfo imgUrl={song.imgUrl} key={`songLoop_${song._id}`} type={"album"}
+              _id={song._id}
+              >
                 <p>{song.name}</p>
                 <p>{song.artist}</p>
                 <SongAttributes song={song} key={index}/>
