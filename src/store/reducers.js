@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
+  auth:false,
  user:{},
  albums:[],
  artists:[],
@@ -22,6 +23,9 @@ export const userDataSlice = createSlice({
   name: 'music',
   initialState,
   reducers: {
+    setAuth: (state,action) => {
+      state.auth = action.payload
+    },
     setUserData: (state,action) => {
       state.user = action.payload
     }, 
@@ -59,6 +63,6 @@ export const userDataSlice = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-export const { setUserData,setLoading,setArtists,setSongs,setAlbums,setAllUserData,setGlobalFilters,setIsSongPlaying,setSongIndex,AddSongToPlayList } = userDataSlice.actions
+export const { setAuth , setUserData,setLoading,setArtists,setSongs,setAlbums,setAllUserData,setGlobalFilters,setIsSongPlaying,setSongIndex,AddSongToPlayList } = userDataSlice.actions
 
 export default userDataSlice.reducer

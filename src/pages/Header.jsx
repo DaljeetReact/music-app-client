@@ -1,12 +1,13 @@
 import { useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom'
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { FaCrown } from 'react-icons/fa';
 import { motion } from "framer-motion"
 import {getAuth} from 'firebase/auth'
 import { FirebaseApp } from '../config/firebase';
 import { MenuItems, isActiveClass, isNonActiveClasas } from '../utils/styles';
 import { Logo } from '../assets/img'
+import { setAuth, setIsSongPlaying } from '../store/reducers';
 function Header() {
   const [isMenu, setIsMenu] = useState(false);
 
@@ -16,13 +17,15 @@ function Header() {
   const addActiveClass = ({ isActive }) => {
     return isActive ? isActiveClass : isNonActiveClasas
   }
-
+  const dispatch = useDispatch();
   const navigator = useNavigate();
 
-  const Logout = () =>{
-    FireAuth.signOut().then(()=>{
+  const Logout = async () =>{
+   await FireAuth.signOut().then(()=>{
       window.localStorage.setItem('auth',false);
-      window.localStorage.removeItem('persist:root');      
+      window.localStorage.removeItem('persist:root');  
+      dispatch(setIsSongPlaying(false));
+      dispatch(setAuth(false));  
     }).catch(e=>console.log(e));
     navigator("/login",{replace:true})
   }

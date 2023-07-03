@@ -1,56 +1,20 @@
-import { getAuth } from "firebase/auth";
 import { AnimatePresence } from 'framer-motion';
 import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { Navigate, Route, Routes, useNavigate } from 'react-router-dom';
 import { motion } from "framer-motion";
-
-import { ValidateUserLogin } from "./apis";
+// Adding Toster notification
+import { ToastContainer} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { Error404, Home, Login,MusicPlayer,PlayList } from './pages';
 import { Dashboard } from './pages/admin';
-import { FirebaseApp } from './config/firebase';
-import { setIsSongPlaying, setUserData } from "./store/reducers";
 
 function App() {
-  const auth = getAuth(FirebaseApp);
-  const checkAuth = false || (window.localStorage.getItem("auth")??false);
-  const [IsLoggedIn, setIsLoggedIn] = useState(checkAuth);
+
   const [isPlayListOpen, setLsPlayListOpen] = useState(false);
 
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const isSongPlaying =   useSelector((state)=>state.isSongPlaying);
+  const {auth} =  useSelector(state=>state)
  
-  useEffect(() => {   
-    if(!IsLoggedIn){ 
-      //if not logged in then it will redirect user to login page 
-      navigate("/login");
-      return;
-    }
-    CheckAuthState();
-    dispatch(setIsSongPlaying(true));
-  },[]);
-
-  const CheckAuthState =  async () =>{
-    //onAuthStateChanged is firebase method, it will trigger whenever the state will change
-   await auth.onAuthStateChanged((user) => { 
-      if (user?.emailVerified) {
-        user.getIdToken().then((token) => {
-          ValidateUserLogin(token).then(({data})=>{
-            if(data !== undefined){
-              dispatch(setUserData(data.data));
-            }
-           
-          }).catch(e=>console.log(e));
-        })
-        setIsLoggedIn(true);
-      } else {
-        setIsLoggedIn(false);
-        window.localStorage.setItem("auth", false);
-        navigate("/login");
-      }
-    });
-  }
 
   return (
     <AnimatePresence mode='wait'>
@@ -58,15 +22,15 @@ function App() {
       <div className="bg-[url('./assets/img/as.jpg')] bg-cover bg-no-repeat bg-fixed fixed top-0 bottom-0 right-0 left-0 z-[-1]"></div>
         <Routes>
           <Route exact path="/" 
-          element={IsLoggedIn? <Navigate to="/home" replace={true} /> :<Navigate to="/login"  replace={true} /> }
+          element={auth? <Navigate to="/home" replace={true} /> :<Navigate to="/login"  replace={true} /> }
 
            />
-          <Route path='/home' element={<Home IsLoggedIn={IsLoggedIn} />} />
-          <Route path='/login' element={<Login setIsLoggedIn={setIsLoggedIn} IsLoggedIn={IsLoggedIn} />} />
+          <Route path='/home' element={<Home />} />
+          <Route path='/login' element={<Login />} />
           <Route path='/dashboard/*' element={<Dashboard />} />
           <Route path="*" element={<Error404 />} />
         </Routes>
-          {(IsLoggedIn)&&(
+          {(auth)&&(
             <motion.div
               initial={{opacity:0,y:50}}
               animate={{opacity:1,y:0}}
@@ -76,10 +40,11 @@ function App() {
             </motion.div>
           )}
 
-           {(isPlayListOpen&& IsLoggedIn)&&(
+           {(isPlayListOpen&& auth)&&(
               <PlayList setLsPlayListOpen={setLsPlayListOpen} isPlayListOpen={isPlayListOpen}/>
             )}
       </div>
+      <ToastContainer/>
     </AnimatePresence>
   );
 }
