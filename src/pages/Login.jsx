@@ -23,30 +23,7 @@ function Login() {;
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const AllUsers = async () =>{
-   await axios.get(`${userApi}/fetch`).then(({data})=>{
-      dispatch(setAllUserData(data.data));
-    }).catch(e=>console.log(e));
-  }
-
-  const AllSongs = async () =>{
-    await axios.get(songsApi).then(({data})=>{
-      dispatch(setSongs(data.data));
-    }).catch(e=>console.log(e));
-  }
-
-  const AllArtists = async () =>{
-    await axios.get(artistApi).then(({data})=>{
-      dispatch(setArtists(data.data));
-    }).catch(e=>console.log(e));
-  }
-
-  const AllAlbums = async () =>{
-    await axios.get(albumApi).then(({data})=>{
-      dispatch(setAlbums(data.data));
-    }).catch(e=>console.log(e));
-  }
-
+ 
 
   const Authentication = async () => {
     await signInWithPopup(firebaseAuthentication, googleAuthenticationProvide)
@@ -64,10 +41,6 @@ function Login() {;
           ValidateUserLogin(token).then(({data})=>{
             if(data !== undefined){
               window.localStorage.setItem("auth", true);
-              AllUsers();
-              AllArtists();
-              AllAlbums();
-              AllSongs();
               //Dispatch 
               dispatch(setUserData(data.data));
               dispatch(setAuth(true));
