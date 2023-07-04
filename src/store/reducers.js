@@ -47,6 +47,9 @@ export const userDataSlice = createSlice({
           update = {...update,[name]:val};
       state.filters = update;
     },
+    resetFilters:(state,action) => {
+      state.filters = action.payload;
+    },
     setLoading: (state,action)=>{
         state.loading = action.payload
     },
@@ -63,6 +66,6 @@ export const userDataSlice = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-export const { setAuth , setUserData,setLoading,setArtists,setSongs,setAlbums,setAllUserData,setGlobalFilters,setIsSongPlaying,setSongIndex,AddSongToPlayList } = userDataSlice.actions
+export const { setAuth , setUserData,setLoading,setArtists,setSongs,setAlbums,setAllUserData,setGlobalFilters,setIsSongPlaying,setSongIndex,AddSongToPlayList,resetFilters } = userDataSlice.actions
 
 export default userDataSlice.reducer
