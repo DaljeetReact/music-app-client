@@ -42,8 +42,8 @@ function Home() {
     {
         breakpoint: 800,
         settings: {
-            slidesToShow: 5,
-            slidesToScroll: 5
+            slidesToShow: 4,
+            slidesToScroll: 4
         }
     },
     {
