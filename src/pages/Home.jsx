@@ -101,14 +101,13 @@ useEffect(() => {
     <div>
     <Header/>
     <SearchBar SearchTerm={SearchTerm} setSearchTerm={setSearchTerm}/>
-    <div className='py-5'>
+    
       {SearchTerm.length > 0 &&(
-        <>
+        <div className='py-5'>
           <div className='font-semibold text-center text-sm'>Searching for:{SearchTerm}</div>
           <div className='font-semibold text-center text-sm'>Total found:{filterSongs.length}</div>
-        </>
+        </div>
       )}
-    </div>
     <div className='w-[80%] m-auto  my-8'>
       <div className='font-semibold text-center text-sm text-white'>
       Choose Filter
