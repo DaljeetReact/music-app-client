@@ -6,7 +6,12 @@ export {default as Artists} from "./Artists"
 export {default as Albums} from "./Albums"
 export {default as NewSong} from "./NewSong"
 
-
+export const filtersInit = {
+    Artist: "",
+    Album: "",
+    Language: "",
+    Category: ""
+};
 
 export const Categories = [
     { _id: 2, name: "Jasp", value: "jasp" },

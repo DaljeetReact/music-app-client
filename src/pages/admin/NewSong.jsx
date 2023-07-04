@@ -3,18 +3,13 @@ import { useSelector } from 'react-redux';
 import axios from 'axios';
 import { motion } from 'framer-motion';
 
-import { Categories, languages } from "./index";
+import { Categories, languages ,filtersInit } from "./index";
 import { DropDown, FileUploadComponent,ObjectValidator } from "./components/index.jsx";
 import { songsApi } from '../../utils';
 import AddArtist from './components/AddArtist';
 import AddAlbum from './components/AddAlbum';
 import { toast } from 'react-toastify';
-let filtersInit = {
-  Artist: "",
-  Album: "",
-  Language: "",
-  Category: ""
-};
+
 function NewSong() {
   const { artists, albums ,filters } = useSelector(state => state);
 

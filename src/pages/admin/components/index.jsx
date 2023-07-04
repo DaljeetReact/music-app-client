@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { FaChevronDown, FaCloudUploadAlt, FaMusic, FaTrash } from 'react-icons/fa';
+import { RiPlayListAddLine,RiHeartLine } from 'react-icons/ri';
 import { getDownloadURL, ref, uploadBytesResumable, deleteObject } from "firebase/storage";
 import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios'
@@ -78,6 +79,8 @@ export const DropDown = ({ name, dataInfo, setFilters, Filters }) => {
     //change State to normal
     setIsOpen(!isOpen);
   }
+
+
 
   const isActive = (data, name) => {
     let classNa = `${MenuItems} py-4 px-2 flex flex-row items-center gap-2`;
@@ -290,5 +293,20 @@ export const DeleteFileFromFireStore = ({ url, type, id, songUrl }) => {
       </div>
 
     </motion.div>
+  )
+}
+
+export const SongAttributes = ({song,pushToPlayList})=>{
+  return(
+    <div className='absolute top-2 left-1 flex flex-col gap-1' key={`list-atrr${song._id}`}>
+      <span className='w-8 h-8 rounded-full bg-red-500 flex justify-center items-center shadow-md'
+        onClick={()=>pushToPlayList(song)}
+      >
+         <RiPlayListAddLine className='text-white' />
+      </span>
+      <span className='w-8 h-8 rounded-full bg-red-500 flex justify-center items-center shadow-md'>
+         <RiHeartLine className='text-white' />
+      </span>
+    </div>
   )
 }

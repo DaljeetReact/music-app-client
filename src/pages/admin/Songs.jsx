@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
-import { RiPlayListAddLine,RiHeartLine } from 'react-icons/ri';
 
 
 
@@ -9,6 +8,7 @@ import { RiPlayListAddLine,RiHeartLine } from 'react-icons/ri';
 import CardInfo from './components/CardInfo'
 import { AddSongToPlayList } from '../../store/reducers';
 import { toast } from 'react-toastify';
+import { SongAttributes } from './components';
 function Songs() {
 
   const {songs,currentPlaylist} = useSelector(state => state);
@@ -29,20 +29,7 @@ function Songs() {
     }
     
   }
-  const SongAttributes = ({song})=>{
-    return(
-      <div className='absolute top-2 left-1 flex flex-col gap-1' key={`list-atrr${song._id}`}>
-        <span className='w-8 h-8 rounded-full bg-red-500 flex justify-center items-center shadow-md'
-          onClick={()=>pushToPlayList(song)}
-        >
-           <RiPlayListAddLine className='text-white' />
-        </span>
-        <span className='w-8 h-8 rounded-full bg-red-500 flex justify-center items-center shadow-md'>
-           <RiHeartLine className='text-white' />
-        </span>
-      </div>
-    )
-  }
+  
 
   return (
     <div className='w-[80%] m-auto border-1 border-black mt-20 p-5 shadow-sm rounded-xl relative  backdrop-blur-3xl overflow-hidden '>
@@ -70,7 +57,7 @@ function Songs() {
               >
                 <p>{song.name}</p>
                 <p>{song.artist}</p>
-                <SongAttributes song={song} key={index}/>
+                <SongAttributes song={song} key={index} pushToPlayList={pushToPlayList}/>
               </CardInfo>
             ))}
           </>

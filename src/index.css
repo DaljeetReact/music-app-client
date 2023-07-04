@@ -13,6 +13,9 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+.react-slideshow-wrapper .images-wrap > div {
+  padding: 0 15px;
+}
 
 .rhap_container{
   background-color: transparent !important;
