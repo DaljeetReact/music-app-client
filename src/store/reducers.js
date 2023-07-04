@@ -35,11 +35,20 @@ export const userDataSlice = createSlice({
     setSongs: (state,action) => {
       state.songs = action.payload
     },
+    pushNewSong: (state,action) => {
+      state.songs = [...state.songs,action.payload]
+    },
     setArtists: (state,action) => {
       state.artists = action.payload
     },
+    pushNewArtist: (state,action) => {
+      state.artists = [...state.artists,action.payload]
+    },
     setAlbums: (state,action) => {
       state.albums = action.payload
+    },
+    pushNewAlbum: (state,action) => {
+      state.albums = [...state.albums,action.payload]
     },
     setGlobalFilters: (state,action) => {
       let {name,val} = action.payload;
@@ -66,6 +75,6 @@ export const userDataSlice = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-export const { setAuth , setUserData,setLoading,setArtists,setSongs,setAlbums,setAllUserData,setGlobalFilters,setIsSongPlaying,setSongIndex,AddSongToPlayList,resetFilters } = userDataSlice.actions
+export const { setAuth , setUserData,setLoading,setArtists,setSongs,setAlbums,setAllUserData,setGlobalFilters,setIsSongPlaying,setSongIndex,AddSongToPlayList,resetFilters,pushNewSong,pushNewArtist,pushNewAlbum } = userDataSlice.actions
 
 export default userDataSlice.reducer

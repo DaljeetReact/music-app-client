@@ -1,10 +1,11 @@
 import { useState, useEffect } from 'react'
 import { FileUploadComponent, ObjectValidator } from '.'
-import { motion } from "framer-motion";
 import axios from 'axios';
+import { toast } from 'react-toastify';
+import { useDispatch } from 'react-redux';
 
 import { albumApi } from '../../../utils';
-import { toast } from 'react-toastify';
+import { pushNewAlbum } from '../../../store/reducers';
 
 const artistInit = {
   name: "",
@@ -13,6 +14,7 @@ const artistInit = {
 
 function AddAlbum() {
   
+  const dispatch = useDispatch();
   const [uploadedImageURL, setUploadedImageURL] = useState(null);
   const [IsLoading, setIsLoading] = useState(false);
   const [ArtitsFields, setArtitsFields] = useState(artistInit);
@@ -39,8 +41,9 @@ function AddAlbum() {
       axios.post(albumApi,ArtitsFields).then(({data})=>{
           if(data.status === 201){
             toast.success("Album has been added");
-              setArtitsFields(artistInit);
-              setUploadedImageURL(null);
+            dispatch(pushNewAlbum(data.Album))
+            setArtitsFields(artistInit);
+            setUploadedImageURL(null);
           }
       }).catch(e=>console.log(e)).finally(()=>{
           setIsLoading(false);

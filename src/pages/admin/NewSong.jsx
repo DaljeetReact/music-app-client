@@ -1,17 +1,18 @@
 import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
-import { motion } from 'framer-motion';
+import { toast } from 'react-toastify';
 
 import { Categories, languages ,filtersInit } from "./index";
 import { DropDown, FileUploadComponent,ObjectValidator } from "./components/index.jsx";
 import { songsApi } from '../../utils';
 import AddArtist from './components/AddArtist';
 import AddAlbum from './components/AddAlbum';
-import { toast } from 'react-toastify';
+import { pushNewSong } from '../../store/reducers';
 
 function NewSong() {
   const { artists, albums ,filters } = useSelector(state => state);
+  const dispatch = useDispatch();
 
   const [IsLoading, setIsLoading] = useState(false);
   // Song uploading Form Data
@@ -50,6 +51,7 @@ function NewSong() {
    await axios.post(`${songsApi}`,data).then(({data})=>{
       if(data.status === 201){
         resetSongForm();
+        dispatch(pushNewSong(data.Song));
         toast.success("Song Has bee Successfully uploaded ");
       }
     }).catch(e=>console.log(e)).finally(()=>{

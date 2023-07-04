@@ -1,10 +1,11 @@
 import { useState, useEffect } from 'react'
 import { FileUploadComponent, ObjectValidator } from '.'
-import { motion } from "framer-motion";
 import axios from 'axios';
+import { toast } from 'react-toastify';
+import { useDispatch } from 'react-redux';
 
 import { artistApi } from '../../../utils';
-import { toast } from 'react-toastify';
+import { pushNewArtist } from '../../../store/reducers';
 
 const artistInit = {
     name: "",
@@ -14,7 +15,8 @@ const artistInit = {
     facebook: ""
 }
 function AddArtist() {
-
+     
+    const dispatch = useDispatch();
     const [uploadedImageURL, setUploadedImageURL] = useState(null);
     const [IsLoading, setIsLoading] = useState(false);
     const [ArtitsFields, setArtitsFields] = useState(artistInit);
@@ -43,6 +45,7 @@ function AddArtist() {
         axios.post(artistApi,ArtitsFields).then(({data})=>{
             if(data.status === 201){
                 toast.success("Artist has been added");
+                dispatch(pushNewArtist(data.artist));
                 setArtitsFields(artistInit);
                 setUploadedImageURL(null);
             }
