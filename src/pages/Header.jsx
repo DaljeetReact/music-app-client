@@ -39,8 +39,7 @@ function Header() {
 
         <ul className='flex items-center justify-center ml-7'>
           <li className='mx-5 text-lg'> <NavLink to={"/home"} className={addActiveClass}>Home</NavLink></li>
-          <li className='mx-5 text-lg'> <NavLink to={"/premium"} className={addActiveClass}>Premium</NavLink></li>
-          <li className='mx-5 text-lg'> <NavLink to={"/musics"} className={addActiveClass}>Musics</NavLink></li>
+          <li className='mx-5 text-lg'> <NavLink to={"/music"} className={addActiveClass}>Musics</NavLink></li>
           <li className='mx-5 text-lg'> <NavLink to={"/contact-us"} className={addActiveClass}>Contact Us</NavLink></li>
         </ul>
       </div>

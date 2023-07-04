@@ -29,3 +29,24 @@ export const languages = [
     { _id: 6, name: "Punjabi", value: "punjabi" },
     { _id: 7, name: "Italian", value: "italian" },
 ];
+
+export const responsiveSettings = [
+    {
+        breakpoint: 800,
+        settings: {
+            slidesToShow: 4,
+            slidesToScroll: 4,
+            autoplay:true,
+            Infinity:true
+        }
+    },
+    {
+        breakpoint: 500,
+        settings: {
+            slidesToShow: 2,
+            slidesToScroll: 2,
+            autoplay:true
+
+        }
+    }
+];

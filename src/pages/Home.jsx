@@ -12,7 +12,7 @@ import { AddSongToPlayList, resetFilters } from '../store/reducers';
 import CardInfo from './admin/components/CardInfo';
 import SearchBar from './SearchBar'
 import {Header} from './index'
-import { Categories, languages,filtersInit } from "./admin/index";
+import { Categories, languages,filtersInit,responsiveSettings } from "./admin/index";
 
 
 function Home() {
@@ -38,22 +38,7 @@ function Home() {
     }
     
   }
-  const responsiveSettings = [
-    {
-        breakpoint: 800,
-        settings: {
-            slidesToShow: 4,
-            slidesToScroll: 4
-        }
-    },
-    {
-        breakpoint: 500,
-        settings: {
-            slidesToShow: 2,
-            slidesToScroll: 2
-        }
-    }
-];
+ 
 
 const clearFilters = () =>{
   dispatch(resetFilters(filtersInit)) 

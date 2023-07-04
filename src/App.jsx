@@ -1,12 +1,12 @@
 import { AnimatePresence } from 'framer-motion';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
 import { motion } from "framer-motion";
 // Adding Toster notification
 import { ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { Error404, Home, Login,MusicPlayer,PlayList } from './pages';
+import { Error404, Home, Login,MusicPlayer,PlayList,Music } from './pages';
 import { Dashboard } from './pages/admin';
 
 function App() {
@@ -31,6 +31,7 @@ function App() {
 
            />
           <Route path='/home' element={<Home />} />
+          <Route path='/music' element={<Music />} />
           <Route path='/login' element={<Login />} />
           <Route path='/dashboard/*' element={<Dashboard />} />
           <Route path="*" element={<Error404 />} />
